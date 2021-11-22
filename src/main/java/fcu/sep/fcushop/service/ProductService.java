@@ -44,8 +44,10 @@ public class ProductService {
   public List<Product> getProducts(String keyword) {
     try (Connection connection = sql2oDbHandler.getConnector().open()) {
       String query = "select ID id, NAME name, IMAGE_URL imageUrl, PRICE price,"
-              + " DESCRIPTION description" + " from PRODUCT where id = " + keyword;
-      return connection.createQuery(query).executeAndFetch(Product.class);
+              + " DESCRIPTION description" + " from PRODUCT where name LIKE :keyword";
+      return connection.createQuery(query)
+              .addParameter("keyword", "%"+keyword+"%")
+              .executeAndFetch(Product.class);
     }
   }
   //productController, Product, ProductService need to change

@@ -4,10 +4,7 @@ import fcu.sep.fcushop.model.Product;
 import fcu.sep.fcushop.service.ProductService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * this is ProductController.
@@ -24,8 +21,8 @@ public class ProductController {
     return productManager.getProducts();
   }
 
-  @PostMapping("/products")
-  public List<Product> getProducts(@RequestParam("keyword") String keyword) {
+  @GetMapping("/products/{keyword}")
+  public List<Product> getProducts(@PathVariable("keyword") String keyword) {
     return productManager.getProducts(keyword);
   }
 }
